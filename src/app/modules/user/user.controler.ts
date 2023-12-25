@@ -5,7 +5,6 @@ import bcrypt from "bcrypt";
 
 
 export const createUser = async (req: Request, res: Response) => {
-    console.log(createUser)
     const { name, email, password, confirmPassword } = req.body;
     const user = await userModel.findOne({ email: email })
     if (user) {
