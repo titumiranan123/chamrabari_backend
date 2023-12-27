@@ -1,4 +1,4 @@
-type Category = 'Men' | 'Women' | 'Children' | 'Corporate';
+type Category = 'Men' | 'Women' | 'Children' | 'Corporate' | 'Uni sex';
 type SubCategory =
     | 'Belt'
     | 'Wallet'
@@ -7,7 +7,10 @@ type SubCategory =
     | 'loffer'
     | 'Shoe'
     | 'Sandel'
-    | 'Half Shoe';
+    | 'Half Shoe'
+    | 'Bag'
+    | 'gadget cover'
+    | 'combo';
 export interface Product {
     product_name: string;
     category: Category;
