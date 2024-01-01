@@ -5,8 +5,7 @@ import { ProductModel } from "./product.model";
 
 export const postProduct = async (req: Request, res: Response) => {
     const product = req.body
-    const DBproduct = await ProducttoDb(product)
-    console.log(DBproduct)
+    await ProducttoDb(product)
 }
 export const getProduct = async (req: Request, res: Response) => {
     const products = await ProductModel.find()
