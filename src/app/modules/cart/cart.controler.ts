@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { cartModel } from "./cart.models";
 
 export const addCart = async (req: Request, res: Response) => {
-
     const cart = req.body;
     const cartDb = new cartModel(cart)
     await cartDb.save()

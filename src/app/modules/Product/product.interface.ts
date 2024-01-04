@@ -16,6 +16,7 @@ export interface Product {
     category: Category;
     sub_category: SubCategory;
     Product_details: string;
+    image_url: string,
     price: string;
 }
 
