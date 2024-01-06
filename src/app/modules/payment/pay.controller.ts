@@ -45,7 +45,6 @@ export const productPayment = async (req: Request, res: Response) => {
     try {
         const sslcz = new SSLCommerzPayment(store_id, store_passwd, is_live);
         const apiResponse = await sslcz.init(data);
-
         // Redirect the user to the payment gateway
         let GatewayPageURL = apiResponse.GatewayPageURL;
         res.json({ url: GatewayPageURL });
@@ -56,18 +55,18 @@ export const productPayment = async (req: Request, res: Response) => {
             paidStatus: false,
             tranjectionId: trnId
         };
-
-
         const res1 = new PaymentModel<payment>(finalOrder);
         console.log('Before save:', res1);
-
         await res1.save();
         console.log('After save:', res1);
-
     } catch (error) {
         console.error('Error initializing payment:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+export const successRoute = async (req: Request, res: Response) => {
+    console.log(req.params.trnId)
+}
 
-export default productPayment;
+
+
