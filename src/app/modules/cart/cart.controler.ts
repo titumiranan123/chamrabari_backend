@@ -3,6 +3,7 @@ import { cartModel } from "./cart.models";
 
 export const addCart = async (req: Request, res: Response) => {
     const cart = req.body;
+    console.log(cart)
     const cartDb = new cartModel(cart)
     await cartDb.save()
     res.status(200).json(cartDb)
