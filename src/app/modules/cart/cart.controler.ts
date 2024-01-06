@@ -10,10 +10,13 @@ export const addCart = async (req: Request, res: Response) => {
 
 }
 export const getCart = async (req: Request, res: Response) => {
-    const cart = await cartModel.find()
-    res.send(cart)
+    console.log(req.params)
+    const cartData = await cartModel.find({ user_email: req.query.email });
+    res.send(cartData)
+
 }
 export const delCart = async (req: Request, res: Response) => {
+    console.log(req)
     const delcart = await cartModel.findByIdAndDelete({ _id: req.params.id })
     try {
         if (!delcart) {

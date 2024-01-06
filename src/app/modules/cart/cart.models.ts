@@ -9,7 +9,7 @@ const cartSchema = new Schema<cart>({
     },
     category: {
         type: String,
-        enum: ['Men', 'Women', 'Children', 'Corporate'],
+        enum: ['Men', 'Women', 'Children', 'Corporate', 'Uni sex'],
         required: true,
     },
     sub_category: {
@@ -23,9 +23,13 @@ const cartSchema = new Schema<cart>({
             'Shoe',
             'Sandel',
             'Half Shoe',
+            'Bag',
+            'combo',
+            'gadget cover'
         ],
         required: true,
     },
+
     Product_details: {
         type: String,
         required: true,
