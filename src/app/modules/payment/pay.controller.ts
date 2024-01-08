@@ -56,17 +56,17 @@ export const productPayment = async (req: Request, res: Response) => {
             tranjectionId: trnId
         };
         const res1 = new PaymentModel<payment>(finalOrder);
-        console.log('Before save:', res1);
         await res1.save();
-        console.log('After save:', res1);
+        return res1
     } catch (error) {
         console.error('Error initializing payment:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
-export const successRoute = async (req: Request, res: Response) => {
-    console.log(req.params.trnId)
-}
+// export const successRoute = async (req: Request, res: Response) => {
+
+//     console.log('i am hitted')
+// }
 
 
 
