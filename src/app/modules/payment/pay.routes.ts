@@ -26,5 +26,30 @@ router.post('/success/:id', async (req, res) => {
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+router.post('/success/:id', async (req, res) => {
+    try {
+        const updatedPayment = await PaymentModel.findOneAndUpdate(
+            { tranjectionId: req.params.id },
+            { $set: { paidStatus: true } },
+            { new: true }
+        );
+
+        if (!updatedPayment) {
+            return res.status(404).json({ error: 'Payment not found' });
+        }
+
+        console.log('Updated payment:', updatedPayment);
+        return res.redirect(`http://localhost:5173/payment/success/${req.params.id}`);
+    } catch (error) {
+        console.error('Error updating payment status:', error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+router.post('/failed', async (req, res) => {
+    return res.redirect(`http://localhost:5173/payment/failed`);
+})
+router.post('/cancel', async (req, res) => {
+    return res.redirect(`http://localhost:5173/payment/success//payment/cancel`);
+})
 
 export default router

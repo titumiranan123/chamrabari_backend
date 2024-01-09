@@ -16,8 +16,8 @@ export const productPayment = async (req: Request, res: Response) => {
         currency: 'BDT',
         tran_id: 'REF123', // use unique tran_id for each api call
         success_url: `http://localhost:3001/payment/success/${trnId}`,
-        fail_url: 'http://localhost:3001/fail',
-        cancel_url: 'http://localhost:3001/cancel',
+        fail_url: 'http://localhost:3001/payment/failed',
+        cancel_url: 'http://localhost:3001/payment/cancel',
         ipn_url: 'http://localhost:3001/ipn',
         shipping_method: 'Courier',
         product_name: 'Computer.',
