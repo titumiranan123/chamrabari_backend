@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import app from "./app/app";
+import app from "./src/app/app";
 
 const port = process.env.PORT || 3001;
 const uri = `mongodb+srv://titumiranangtc:${process.env.DB_PASS}@cluster0.ni5th7w.mongodb.net/?retryWrites=true&w=majority`;

@@ -8,7 +8,9 @@ import 'dotenv/config'
 import jwtRoutes from './modules/jwt/jwt.routes'
 const app = express()
 app.use(cors())
-app.use(express.json())
+
+app.use(express.json({ limit: '10mb' })); // Adjust the limit accordingly
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use('/user', userRoutes)
 app.use('/products', productRoutes)
 app.use('/cart', cartRoutes)
