@@ -1,13 +1,13 @@
 import express, { NextFunction, Request, Response } from 'express'
 import cors from 'cors'
-import userRoutes from './modules/user/user.route'
+import userRoutes from './modules/userAuthentication/user.routes'
 import productRoutes from './modules/Product/product.routes'
 import cartRoutes from './modules/cart/cart.routes'
 import paymentRoutes from './modules/payment/pay.routes'
 import 'dotenv/config'
 import { jwtAuthentication, jwtVerify } from './modules/jwt/jwtRoutes'
 import morgan from 'morgan'
-import { adminAuthentication } from './modules/jwt/adminAuthentication'
+
 const app = express()
 
 app.use([
@@ -17,9 +17,9 @@ app.use([
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
-app.use('/user', adminAuthentication, jwtVerify, userRoutes)
+app.use('/api/v1', userRoutes)
 app.use('/products', productRoutes)
-app.use('/cart', cartRoutes)
+app.use('/api/v1', cartRoutes)
 app.use('/payment', jwtVerify, paymentRoutes)
 app.post('/jwt', jwtAuthentication)
 

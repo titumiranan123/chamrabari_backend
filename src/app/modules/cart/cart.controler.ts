@@ -12,18 +12,18 @@ export const getCart = async (req: Request, res: Response, next: NextFunction) =
     try {
         const user_email = req.decoded.email;
         if (user_email !== req.query.email) {
-            return res.status(404).json({ message: "Unauthorization " })
+            return res.status(404).json({ message: "Unauthorized" });
         }
         const cart = await cartModel.find({ user_email });
+
         if (!cart || cart.length === 0) {
-            res.send({ message: "Please add items to the cart" });
+            return res.status(404).json({ message: "Please add items to the cart" });
         }
-        res.send(cart);
-
+        res.json(cart);
     } catch (error) {
-        next(error)
+        console.error(error);
+        res.status(500).json({ message: "Internal Server Error" });
     }
-
 }
 export const delCart = async (req: Request, res: Response, next: NextFunction) => {
 
