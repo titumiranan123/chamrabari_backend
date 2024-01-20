@@ -5,8 +5,9 @@ import productRoutes from './modules/Product/product.routes'
 import cartRoutes from './modules/cart/cart.routes'
 import paymentRoutes from './modules/payment/pay.routes'
 import 'dotenv/config'
-import { jwtAuthentication } from './modules/jwt/jwtRoutes'
+import { jwtAuthentication, jwtVerify } from './modules/jwt/jwtRoutes'
 import morgan from 'morgan'
+import { adminAuthentication } from './modules/jwt/adminAuthentication'
 const app = express()
 
 app.use([
@@ -16,10 +17,10 @@ app.use([
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
-app.use('/user', userRoutes)
+app.use('/user', adminAuthentication, jwtVerify, userRoutes)
 app.use('/products', productRoutes)
 app.use('/cart', cartRoutes)
-app.use('/payment', paymentRoutes)
+app.use('/payment', jwtVerify, paymentRoutes)
 app.post('/jwt', jwtAuthentication)
 
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {

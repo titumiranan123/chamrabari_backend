@@ -1,13 +1,12 @@
 import { NextFunction, Request, Response } from "express";
 import { cartModel } from "./cart.models";
-import { userModel } from "../user/user.model";
+
 
 export const addCart = async (req: Request, res: Response) => {
     const cart = req.body;
     const cartDb = new cartModel(cart)
     await cartDb.save()
     res.status(200).json(cartDb)
-
 }
 export const getCart = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -26,7 +25,7 @@ export const getCart = async (req: Request, res: Response, next: NextFunction) =
     }
 
 }
-export const delCart = async (req: Request, res: Response) => {
+export const delCart = async (req: Request, res: Response, next: NextFunction) => {
 
     const delcart = await cartModel.findByIdAndDelete({ _id: req.params.id })
     try {
@@ -35,6 +34,6 @@ export const delCart = async (req: Request, res: Response) => {
         }
         return res.status(200).json({ message: 'deleted' })
     } catch (err: any) {
-        res.status(500).json({ message: err.message });
+        next(err)
     }
 }
