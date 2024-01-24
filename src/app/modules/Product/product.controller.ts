@@ -5,7 +5,8 @@ import { cartModel } from "../cart/cart.models";
 
 
 export const postProduct = async (req: Request, res: Response) => {
-    const product = req.body
+    const product = req.body;
+    console.log(product.discount)
     const data = await ProducttoDb(product)
     return res.status(200).json({ message: 'success', data });
 }
@@ -18,13 +19,11 @@ export const getsingleProduct = async (req: Request, res: Response) => {
         const id = req.params.id
         const product = await ProductModel.findOne({ _id: id })
         res.json(product)
-
     } catch (error: any) {
         res.status(500).json({ message: error.message })
     }
 }
 export const deletProduct = async (req: Request, res: Response) => {
-
     try {
         const deletedProduct = await ProductModel.findByIdAndDelete({ _id: req.params.id })
         await cartModel.findByIdAndDelete({ _id: req.params.id })
@@ -35,12 +34,10 @@ export const deletProduct = async (req: Request, res: Response) => {
     } catch (err: any) {
         res.status(500).json({ message: err.message });
     }
-
 }
 
 export const updateProduct = async (req: Request, res: Response) => {
     const productId = req.params.id;
-
     const updatedProduct = await ProductModel.findByIdAndUpdate(
         productId,
         req.body,
@@ -50,5 +47,4 @@ export const updateProduct = async (req: Request, res: Response) => {
         return res.status(404).json({ message: 'Product not found' });
     }
     return res.status(200).json({ message: 'Product Update', updatedProduct });
-
 }

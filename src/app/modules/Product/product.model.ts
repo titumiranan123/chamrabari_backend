@@ -8,20 +8,20 @@ const productSchema = new Schema<Product>({
     },
     category: {
         type: String,
-        enum: ['Men', 'Women', 'Children', 'Corporate'],
+        enum: ['men', 'women', 'children', 'corporate'],
         required: true,
     },
     sub_category: {
         type: String,
         enum: [
-            'Belt',
-            'Wallet',
-            'Long Wallet',
-            'Purse',
+            'belt',
+            'wallet',
+            'long-wallet',
+            'purse',
             'loffer',
-            'Shoe',
-            'Sandel',
-            'Half Shoe',
+            'shoe',
+            'sandel',
+            'half-shoe',
         ],
         required: true,
     },
@@ -38,7 +38,7 @@ const productSchema = new Schema<Product>({
         required: true,
     },
     discount: {
-        type: Number,
+        type: String,
         required: true,
     },
 });

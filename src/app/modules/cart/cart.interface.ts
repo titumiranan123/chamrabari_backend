@@ -1,15 +1,15 @@
-type Category = 'Men' | 'Women' | 'Children' | 'Corporate' | 'Uni sex';
+type Category = 'men' | 'women' | 'children' | 'corporate' | 'uni-sex';
 type SubCategory =
-    | 'Belt'
-    | 'Wallet'
-    | 'Long Wallet'
-    | 'Purse'
+    | 'belt'
+    | 'wallet'
+    | 'long-wallet'
+    | 'purse'
     | 'loffer'
-    | 'Shoe'
-    | 'Sandel'
-    | 'Half Shoe'
-    | 'Bag'
-    | 'gadget cover'
+    | 'shoe'
+    | 'sandel'
+    | 'half-shoe'
+    | 'bag'
+    | 'gadget-cover'
     | 'combo';
 
 export interface cart {

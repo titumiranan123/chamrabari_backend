@@ -9,23 +9,23 @@ const cartSchema = new Schema<cart>({
     },
     category: {
         type: String,
-        enum: ['Men', 'Women', 'Children', 'Corporate', 'Uni sex'],
+        enum: ['men', 'women', 'children', 'corporate', 'uni-sex'],
         required: true,
     },
     sub_category: {
         type: String,
         enum: [
-            'Belt',
-            'Wallet',
-            'Long Wallet',
-            'Purse',
+            'belt',
+            'wallet',
+            'long-wallet',
+            'purse',
             'loffer',
-            'Shoe',
-            'Sandel',
-            'Half Shoe',
-            'Bag',
+            'shoe',
+            'sandel',
+            'half-shoe',
+            'bag',
             'combo',
-            'gadget cover'
+            'gadget-cover'
         ],
         required: true,
     },

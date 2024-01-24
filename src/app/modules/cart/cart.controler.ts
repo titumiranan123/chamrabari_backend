@@ -35,10 +35,10 @@ export const getCart = async (req: Request, res: Response, next: NextFunction) =
             return res.status(404).json({ message: "Please add items to the cart" });
         }
 
-        res.status(200).json(cart);
+        return res.status(200).json(cart);
     } catch (error) {
         next(error);
-        res.status(500).json({ message: "Internal Server Error" });
+        return res.status(500).json({ message: "Internal Server Error" });
     }
 }
 
