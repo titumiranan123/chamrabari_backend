@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { ProducttoDb } from "./product.service";
 import { ProductModel } from "./product.model";
+import { cartModel } from "../cart/cart.models";
 
 
 export const postProduct = async (req: Request, res: Response) => {
@@ -26,6 +27,7 @@ export const deletProduct = async (req: Request, res: Response) => {
 
     try {
         const deletedProduct = await ProductModel.findByIdAndDelete({ _id: req.params.id })
+        await cartModel.findByIdAndDelete({ _id: req.params.id })
         if (!deletedProduct) {
             return res.status(404).json({ message: "product is not found" })
         }

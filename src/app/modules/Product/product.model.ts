@@ -37,5 +37,9 @@ const productSchema = new Schema<Product>({
         type: String,
         required: true,
     },
+    discount: {
+        type: Number,
+        required: true,
+    },
 });
 export const ProductModel = model<Product>('Product', productSchema)

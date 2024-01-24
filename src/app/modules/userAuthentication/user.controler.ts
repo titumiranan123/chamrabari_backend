@@ -50,11 +50,10 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
             return res.status(400).json({ message: "User Not Found" })
         }
         // const { } = checkUser;
-        const { name, _id } = checkUser;
+        const { name, role } = checkUser;
 
-
-        const token = jwt.sign({ name, email, _id }, `${process.env.ACCESS_TOKEN}`, { expiresIn: '2h' })
-        return res.status(200).json({ message: "Login Successfull", user: { name, email, _id }, token })
+        const token = jwt.sign({ name, email, role }, `${process.env.ACCESS_TOKEN}`, { expiresIn: '10h' })
+        return res.status(200).json({ message: "Login Successfull", user: { name, email }, token })
     } catch (error) {
         next(error)
     }

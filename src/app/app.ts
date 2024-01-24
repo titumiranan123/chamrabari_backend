@@ -19,7 +19,7 @@ app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
 app.use('/api/v1', userRoutes)
 app.use('/products', productRoutes)
-app.use('/api/v1', cartRoutes)
+app.use('/api/v1/cart', cartRoutes)
 app.use('/payment', jwtVerify, paymentRoutes)
 app.post('/jwt', jwtAuthentication)
 

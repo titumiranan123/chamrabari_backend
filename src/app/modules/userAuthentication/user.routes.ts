@@ -6,7 +6,6 @@ import { superadminAuthentication } from '../jwt/superAdminAuthentication';
 
 const router = express.Router()
 //SUPER ADMIN ROUTE
-
 router.put('/user/:userId', jwtVerify, superadminAuthentication, updateUser)
 
 // admin user

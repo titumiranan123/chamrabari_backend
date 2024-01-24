@@ -18,5 +18,6 @@ export interface Product {
     Product_details: string;
     image_url: string,
     price: string;
+    discount: number;
 }
 
