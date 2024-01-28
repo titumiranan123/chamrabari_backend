@@ -3,6 +3,11 @@ import { cart } from "./cart.interface";
 import { model } from "mongoose";
 
 const cartSchema = new Schema<cart>({
+    productId: {
+        type: String,
+        required: true,
+        unique: true
+    },
     product_name: {
         type: String,
         required: true,

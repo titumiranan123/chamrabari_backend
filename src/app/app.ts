@@ -20,7 +20,7 @@ app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use('/api/v1', userRoutes)
 app.use('/products', productRoutes)
 app.use('/api/v1/cart', cartRoutes)
-app.use('/payment', jwtVerify, paymentRoutes)
+app.use('/payment', paymentRoutes)
 app.post('/jwt', jwtAuthentication)
 
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {

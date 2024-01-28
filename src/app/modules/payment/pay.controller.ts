@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import { PaymentModel } from './pay.models';
 import { cart } from '../cart/cart.interface';
 import { payment } from './pay.interface';
+import { ProductModel } from '../Product/product.model';
 const SSLCommerzPayment = require('sslcommerz-lts');
 const store_id = 'hotel654b12a0eb375';
 const store_passwd = 'hotel654b12a0eb375@ssl';
@@ -11,6 +12,10 @@ const trnId = new mongoose.Types.ObjectId().toString();
 
 export const productPayment = async (req: Request, res: Response) => {
     const order = req.body;
+    const productId = order.productId
+    const product = await ProductModel.findOne({ productId })
+    console.log(product)
+
     const data = {
         total_amount: 100,
         currency: 'BDT',
@@ -53,7 +58,9 @@ export const productPayment = async (req: Request, res: Response) => {
         const finalOrder = {
             order: order,
             paidStatus: false,
-            tranjectionId: trnId
+            tranjectionId: trnId,
+            date: formattedDate,
+            payment_track: new Date(),
         };
         const res1 = new PaymentModel<payment>(finalOrder);
         await res1.save();
@@ -69,4 +76,14 @@ export const productPayment = async (req: Request, res: Response) => {
 // }
 
 
+function getFormattedDate() {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const currentDate = new Date();
+    const day = currentDate.getDate();
+    const monthIndex = currentDate.getMonth();
+    const month = months[monthIndex];
+    return month + ' ' + day;
+}
 
+const formattedDate = getFormattedDate();
+console.log(formattedDate);

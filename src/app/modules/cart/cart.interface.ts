@@ -13,6 +13,7 @@ type SubCategory =
     | 'combo';
 
 export interface cart {
+    productId: string;
     product_name: string;
     category: Category;
     sub_category: SubCategory;

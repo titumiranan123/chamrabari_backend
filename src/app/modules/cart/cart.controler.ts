@@ -4,11 +4,11 @@ import validator from 'validator';
 
 export const addCart = async (req: Request, res: Response) => {
     const cart = req.body;
+    console.log(cart)
     const cartDb = new cartModel(cart)
     await cartDb.save()
     res.status(200).json(cartDb)
 }
-
 
 export const getCart = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -28,17 +28,12 @@ export const getCart = async (req: Request, res: Response, next: NextFunction) =
         if (!validator.isEmail(user_email && reqEmail)) {
             return res.status(400).json({ message: "Invalid email format" });
         }
-
         // Query the database
         const cart = await cartModel.find({ user_email });
-        if (!cart || cart.length === 0) {
-            return res.status(404).json({ message: "Please add items to the cart" });
-        }
 
         return res.status(200).json(cart);
     } catch (error) {
         next(error);
-        return res.status(500).json({ message: "Internal Server Error" });
     }
 }
 
