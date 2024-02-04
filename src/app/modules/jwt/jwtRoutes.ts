@@ -20,12 +20,10 @@ export const jwtVerify = (req: Request, res: Response, next: NextFunction) => {
         }
         const token = authorization?.split(' ')[1]
         jwt.verify(token as string, process.env.ACCESS_TOKEN as string, (err, decoded) => {
-            console.log(decoded)
             if (err) {
-                res.status(401).json({ message: "unauthorized " })
+                res.status(401).json({ message: "token expired" }) 
             }
             (req as any).decoded = decoded;
-
             next()
         })
     } catch (error) {

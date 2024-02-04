@@ -5,11 +5,9 @@ import jwt from 'jsonwebtoken'
 // const jwt = require('jsonwebtoken');
 
 
-
 export const registerUser = async (req: Request, res: Response, next: NextFunction) => {
     const { name, email, password } = req.body;
     try {
-
         if (!name || !email || !password) {
             return res.status(404).json({ message: "invalid information" })
         }
@@ -31,8 +29,6 @@ export const registerUser = async (req: Request, res: Response, next: NextFuncti
     } catch (error) {
         next(error)
     }
-
-
 }
 
 export const loginUser = async (req: Request, res: Response, next: NextFunction) => {
@@ -61,7 +57,6 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
 
 export const loggedUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        console.log(req?.decoded)
         res.status(200).send({ "user": req?.decoded })
     } catch (error) {
         next(error)
