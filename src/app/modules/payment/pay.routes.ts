@@ -1,55 +1,22 @@
-import express from 'express'
-import { productPayment } from './pay.controller';
-import { PaymentModel } from './pay.models';
+import express from "express";
+import {
+  getOrder,
+  productPayment,
+  orderConfirm,
+  successOrder,
+} from "./pay.controller";
 
 const router = express.Router();
 
-router.get('/',)
-router.post('/', productPayment)
-// router.post('/success', successRoute)
-router.post('/success/:id', async (req, res) => {
-    try {
-        const updatedPayment = await PaymentModel.findOneAndUpdate(
-            { tranjectionId: req.params.id },
-            { $set: { paidStatus: true } },
-            { new: true }
-        );
-
-        if (!updatedPayment) {
-            return res.status(404).json({ error: 'Payment not found' });
-        }
-
-        console.log('Updated payment:', updatedPayment);
-        return res.redirect(`http://localhost:5173/payment/success/${req.params.id}`);
-    } catch (error) {
-        console.error('Error updating payment status:', error);
-        return res.status(500).json({ error: 'Internal Server Error' });
-    }
+router.get("/", getOrder);
+router.put("/:id", orderConfirm);
+router.post("/", productPayment);
+router.post("/success/:id", successOrder);
+router.post("/failed", async (req, res) => {
+  return res.redirect(`http://localhost:5173/payment/failed`);
 });
-router.post('/success/:id', async (req, res) => {
-    try {
-        const updatedPayment = await PaymentModel.findOneAndUpdate(
-            { tranjectionId: req.params.id },
-            { $set: { paidStatus: true } },
-            { new: true }
-        );
-
-        if (!updatedPayment) {
-            return res.status(404).json({ error: 'Payment not found' });
-        }
-
-        console.log('Updated payment:', updatedPayment);
-        return res.redirect(`http://localhost:5173/payment/success/${req.params.id}`);
-    } catch (error) {
-        console.error('Error updating payment status:', error);
-        return res.status(500).json({ error: 'Internal Server Error' });
-    }
+router.post("/cancel", async (req, res) => {
+  return res.redirect(`http://localhost:5173/payment/success//payment/cancel`);
 });
-router.post('/failed', async (req, res) => {
-    return res.redirect(`http://localhost:5173/payment/failed`);
-})
-router.post('/cancel', async (req, res) => {
-    return res.redirect(`http://localhost:5173/payment/success//payment/cancel`);
-})
 
-export default router
+export default router;
