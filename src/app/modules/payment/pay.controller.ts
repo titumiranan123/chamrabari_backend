@@ -76,8 +76,9 @@ export const getOrder = async (req: Request, res: Response) => {
 };
 
 export const orderConfirm = async (req: Request, res: Response) => {
+  console.log(req.params.id);
   const updatedPayment = await PaymentModel.findOneAndUpdate(
-    { tranjectionId: req.params.id },
+    { _id: req.params.id },
     { $set: { confirmStatus: true } },
     { new: true }
   );

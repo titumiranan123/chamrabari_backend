@@ -7,9 +7,8 @@ import {
 } from "./pay.controller";
 
 const router = express.Router();
-
 router.get("/", getOrder);
-router.put("/:id", orderConfirm);
+router.patch("/:id", orderConfirm);
 router.post("/", productPayment);
 router.post("/success/:id", successOrder);
 router.post("/failed", async (req, res) => {
