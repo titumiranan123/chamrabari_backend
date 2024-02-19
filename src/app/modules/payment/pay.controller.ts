@@ -76,7 +76,6 @@ export const getOrder = async (req: Request, res: Response) => {
 };
 
 export const orderConfirm = async (req: Request, res: Response) => {
-  console.log(req.params.id);
   const updatedPayment = await PaymentModel.findOneAndUpdate(
     { _id: req.params.id },
     { $set: { confirmStatus: true } },
@@ -97,7 +96,6 @@ export const successOrder = async (req: Request, res: Response) => {
       return res.status(404).json({ error: "Payment not found" });
     }
 
-    // console.log("Updated payment:", updatedPayment);
     return res.redirect(
       `http://localhost:5173/payment/success/${req.params.id}`
     );

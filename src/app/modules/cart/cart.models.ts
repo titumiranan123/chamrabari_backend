@@ -50,6 +50,12 @@ const cartSchema = new Schema<cart>({
     type: String,
     required: true,
   },
+  quntity: {
+    type: Number,
+  },
+  payment_status: {
+    type: Boolean,
+  },
 });
 
 export const cartModel = model<cart>("cart", cartSchema);
